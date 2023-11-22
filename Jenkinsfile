@@ -1,31 +1,24 @@
-pipeline 
-{
-    agent any
-
-    stages 
-    {
-        stage('Build') 
-        {
-            steps 
-            {
-                echo 'Build App'
-            }
+node {
+    try {
+        stage('Checkout') {
+            checkout scm
         }
 
-        stage('Test') 
-        {
-            steps 
-            {
-                echo 'Test App'
-            }
+        stage('Compile') {
+            // Compile the Java application
+            sh 'javac Main.java'
         }
 
-        stage('Deploy') 
-        {
-            steps 
-            {
-                echo 'Deploy App'
-            }
+        stage('Run') {
+            // Run the compiled Java application
+            sh 'java -cp . Main'
         }
+
+        stage('Cleanup') {
+            echo 'Doing some cleanup...'
+        }
+    } catch (Exception e) {
+        // Handle exceptions if needed
+        echo "Error: ${e.message}"
     }
 }
