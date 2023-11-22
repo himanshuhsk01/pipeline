@@ -13,11 +13,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Run the compilation command and capture the output
-                    def buildOutput = bat(script: 'javac Main.java', returnStdout: true).trim()
+                    bat(script: 'javac Main.java', returnStatus: true) // Use 'bat' on Windows
                     
-                    // Display the output
-                    echo "Build Output: ${buildOutput}"
                 }
             }
         }
@@ -25,11 +22,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run the test command and capture the output
-                    def testOutput = bat(script: 'java Main', returnStdout: true).trim()
+                    bat(script: 'java Main', returnStatus: true) // Use 'bat' on Windows
                     
-                    // Display the output
-                    echo "Test Output: ${testOutput}"
                 }
             }
         }
