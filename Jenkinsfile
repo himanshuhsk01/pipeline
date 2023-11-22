@@ -15,7 +15,8 @@ pipeline {
             steps {
                 // Compile the Java code
                 script {
-                    sh 'javac Main.java'
+                    bat(script: 'javac Main.java', returnStatus: true) // Use 'bat' on Windows
+                    
                 }
             }
         }
@@ -24,7 +25,8 @@ pipeline {
             steps {
                 // Run any tests if you have them
                 script {
-                    sh 'java Main'
+                    bat(script: 'java Main', returnStatus: true) // Use 'bat' on Windows
+                    
                 }
             }
         }
